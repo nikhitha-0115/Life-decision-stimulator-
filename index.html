@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Life Decision Simulator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">Life Decision Simulator</div>
+    <div class="tools">
+      <label for="currency" class="sr" style="position:absolute;left:-9999px">Currency</label>
+      <select id="currency" aria-label="Currency">
+        <option value="₹">₹ Rupee</option>
+        <option value="$">$ Dollar</option>
+        <option value="€">€ Euro</option>
+        <option value="£">£ Pound</option>
+      </select>
+      <button type="button" id="swap">Swap choices</button>
+      <button type="button" id="reset">Reset</button>
+    </div>
+  </header>
+
+  <h1>Put two choices side by side.</h1>
+  <p class="lede">Type what you're deciding between and fill in the numbers. The comparison updates as you go.</p>
+
+  <section class="split" aria-label="Your two choices" id="split"></section>
+
+  <section class="settings" aria-label="Comparison settings">
+    <div>
+      <h2>Days you'll use it each month</h2>
+      <div class="unit"><input id="days" type="number" inputmode="numeric" min="1" max="31" step="1" value="22" aria-label="Days per month"><span>days</span></div>
+    </div>
+    <div>
+      <h2>Compare over</h2>
+      <div class="years-row">
+        <input id="years" type="range" min="1" max="10" step="1" value="5" aria-label="Number of years to compare">
+        <output id="years-out" for="years">5 years</output>
+      </div>
+    </div>
+    <div>
+      <h2>What matters most to you</h2>
+      <div class="seg" role="radiogroup" aria-label="Priority">
+        <input type="radio" name="prio" id="p-bal" value="balanced" checked><label for="p-bal">Balanced</label>
+        <input type="radio" name="prio" id="p-cost" value="cost"><label for="p-cost">Saving money</label>
+        <input type="radio" name="prio" id="p-time" value="time"><label for="p-time">Saving time</label>
+        <input type="radio" name="prio" id="p-conv" value="conv"><label for="p-conv">Convenience</label>
+      </div>
+    </div>
+  </section>
+
+  <section class="results" aria-labelledby="verdict-h" aria-live="polite">
+    <div class="verdict" id="verdict">
+      <h2 id="verdict-h"></h2>
+      <div id="verdict-text"></div>
+    </div>
+
+    <div class="score">
+      <div class="score-bar" role="img" id="score-bar" aria-label="Overall score split">
+        <div class="sa" id="sa"></div><div class="sb" id="sb"></div>
+      </div>
+      <div class="score-labels"><span class="la" id="la"></span><span class="lb" id="lb"></span></div>
+      <p class="score-note">Overall score weighs total cost, time and convenience by what matters most to you.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th scope="col">Factor</th><th scope="col" class="ha" id="th-a"></th><th scope="col" class="hb" id="th-b"></th></tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+
+    <div class="chart-box">
+      <h3>What you've spent, year by year</h3>
+      <p class="sub" id="chart-sub"></p>
+      <div class="legend"><span><i style="background:var(--a)"></i><span id="lg-a"></span></span><span><i style="background:var(--b)"></i><span id="lg-b"></span></span></div>
+      <div class="chart-scroll"><svg class="chart" id="chart" viewBox="0 0 640 300" role="img"></svg></div>
+    </div>
+
+    <p class="foot">These are estimates based only on the numbers you enter. Change any figure to see how the result shifts.</p>
+  </section>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
